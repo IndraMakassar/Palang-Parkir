@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "872171621775",
+    "project_id": "easyparking-eb22d",
+    "storage_bucket": "easyparking-eb22d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:872171621775:android:39a91d8ad298db33134ffa",
+        "android_client_info": {
+          "package_name": "com.example.easyparking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "872171621775-ldl4ustreh3engt0vj1bp01gol887sli.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.easyparking",
+            "certificate_hash": "dde65850bce94a11a89fee165c1085f5b3129182"
+          }
+        },
+        {
+          "client_id": "872171621775-t7s78m4r6c7n5r7bmt82tiue52aaul8a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlMZLKqL5lSgpY44tky4bsTrS62FhjjDM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "872171621775-t7s78m4r6c7n5r7bmt82tiue52aaul8a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
