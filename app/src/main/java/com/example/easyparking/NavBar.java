@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class nav_bar extends AppCompatActivity {
+public class NavBar extends AppCompatActivity {
     private int selectedTab = 1;
 
     @Override
@@ -31,7 +31,7 @@ public class nav_bar extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
-                .replace(R.id.fragmentView, Pilih_Tempat.class, null)
+                .replace(R.id.fragmentView, PilihTempat.class, null)
                 .commit();
 
 
@@ -60,7 +60,7 @@ public class nav_bar extends AppCompatActivity {
                 if (selectedTab != 1) {
                     getSupportFragmentManager().beginTransaction()
                             .setReorderingAllowed(true)
-                            .replace(R.id.fragmentView, Pilih_Tempat.class, null)
+                            .replace(R.id.fragmentView, PilihTempat.class, null)
                             .commit();
 
 //                                orderTxt.setVisibility(View.GONE);
@@ -98,7 +98,7 @@ public class nav_bar extends AppCompatActivity {
                 if (selectedTab != 2) {
                     getSupportFragmentManager().beginTransaction()
                             .setReorderingAllowed(true)
-                            .replace(R.id.fragmentView, profile.class, null)
+                            .replace(R.id.fragmentView, Profile.class, null)
                             .commit();
 
 

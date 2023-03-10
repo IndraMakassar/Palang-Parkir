@@ -17,7 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import org.jetbrains.annotations.Nullable;
 
-public class palang_Parkir extends Fragment {
+public class PalangParkir extends Fragment {
     @Nullable
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class palang_Parkir extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fm = getActivity().getSupportFragmentManager().beginTransaction();
-                fm.replace(R.id.fragmentView, new booking()).commit();
+                fm.replace(R.id.fragmentView, new Booking()).commit();
             }
         });
 

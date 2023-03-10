@@ -1,12 +1,12 @@
 package com.example.easyparking;
 
-public class dataBooking {
+public class DataBooking {
     private String nama;
     private String plat;
     private String type;
     private String warna;
 
-    public dataBooking(String nama, String plat, String type, String warna) {
+    public DataBooking(String nama, String plat, String type, String warna) {
         this.nama = nama;
         this.plat = plat;
         this.type = type;

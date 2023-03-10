@@ -3,11 +3,9 @@ package com.example.easyparking;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,7 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class forgotPassword extends AppCompatActivity {
+public class ForgotPassword extends AppCompatActivity {
 
     private EditText etEmail;
     private TextView sendButton;
@@ -47,7 +45,7 @@ public class forgotPassword extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(forgotPassword.this, login.class));
+                startActivity(new Intent(ForgotPassword.this, Login.class));
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
@@ -68,13 +66,13 @@ public class forgotPassword extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
 
                 if(task.isSuccessful()){
-                    Toast.makeText(forgotPassword.this, "Check your email to reset your password" , Toast.LENGTH_LONG).show();
-                    Toast.makeText(forgotPassword.this, "Masuk di Gmail --> Spam" , Toast.LENGTH_LONG).show();
+                    Toast.makeText(ForgotPassword.this, "Check your email to reset your password" , Toast.LENGTH_LONG).show();
+                    Toast.makeText(ForgotPassword.this, "Masuk di Gmail --> Spam" , Toast.LENGTH_LONG).show();
 //                    progressBar.setVisibility(View.GONE);
 //                    progressDialog.hide();
 
                 } else{
-                    Toast.makeText(forgotPassword.this, "Something wrong, Try Again", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ForgotPassword.this, "Something wrong, Try Again", Toast.LENGTH_LONG).show();
 //                    progressBar.setVisibility(View.GONE);
 //                    progressDialog.hide();
                 }

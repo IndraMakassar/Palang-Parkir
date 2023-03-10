@@ -3,11 +3,9 @@ package com.example.easyparking;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,10 +18,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class daftar_akun extends AppCompatActivity implements View.OnClickListener {
+public class DaftarAkun extends AppCompatActivity implements View.OnClickListener {
 
     private FirebaseAuth mAuth, auth;
     private EditText etemail, etpassword,etNama;
@@ -74,7 +71,7 @@ public class daftar_akun extends AppCompatActivity implements View.OnClickListen
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(daftar_akun.this, login.class));
+                startActivity(new Intent(DaftarAkun.this, Login.class));
 //                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
@@ -101,7 +98,7 @@ public class daftar_akun extends AppCompatActivity implements View.OnClickListen
     }
     private void HomeActivity() {
         finish();
-        Intent intent = new Intent(getApplicationContext(), login.class);
+        Intent intent = new Intent(getApplicationContext(), Login.class);
         startActivity(intent);
     }
 
@@ -159,20 +156,20 @@ public class daftar_akun extends AppCompatActivity implements View.OnClickListen
 
                                     if (task1.isSuccessful()) {
 
-                                        Toast.makeText(daftar_akun.this, "Akun berhasil didaftar", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(DaftarAkun.this, "Akun berhasil didaftar", Toast.LENGTH_LONG).show();
 //                                        progressBar.setVisibility(View.VISIBLE);
 
-                                        startActivity(new Intent(this, login.class));
+                                        startActivity(new Intent(this, Login.class));
 //
 
                                     } else {
 
-                                        Toast.makeText(daftar_akun.this, "Terjadi Kesalahan, Silahkan Coba Lagi", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(DaftarAkun.this, "Terjadi Kesalahan, Silahkan Coba Lagi", Toast.LENGTH_LONG).show();
 
                                     }
                                 });
                     } else {
-                        Toast.makeText(daftar_akun.this, "Akun Sudah Terdaftar", Toast.LENGTH_LONG).show();
+                        Toast.makeText(DaftarAkun.this, "Akun Sudah Terdaftar", Toast.LENGTH_LONG).show();
 //
                     }
                 });

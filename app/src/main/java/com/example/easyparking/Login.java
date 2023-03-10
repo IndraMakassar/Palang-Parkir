@@ -3,11 +3,9 @@ package com.example.easyparking;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,7 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class login extends AppCompatActivity implements View.OnClickListener {
+public class Login extends AppCompatActivity implements View.OnClickListener {
 
     private TextView daftar, forgotPassword;
     private EditText etemail, etpassword;
@@ -90,7 +88,7 @@ public class login extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.daftar:
-                startActivity(new Intent(this, daftar_akun.class));
+                startActivity(new Intent(this, DaftarAkun.class));
                 break;
             case R.id.btnMasuk:
                 userLogin();
@@ -98,7 +96,7 @@ public class login extends AppCompatActivity implements View.OnClickListener {
                 break;
 
             case R.id.lupaPass:
-                startActivity(new Intent(this, forgotPassword.class));
+                startActivity(new Intent(this, ForgotPassword.class));
                 break;
         }
     }
@@ -122,7 +120,7 @@ public class login extends AppCompatActivity implements View.OnClickListener {
     }
     private void HomeActivity() {
         finish();
-        Intent intent = new Intent(getApplicationContext(), nav_bar.class);
+        Intent intent = new Intent(getApplicationContext(), NavBar.class);
         startActivity(intent);
     }
 
@@ -163,12 +161,12 @@ public class login extends AppCompatActivity implements View.OnClickListener {
 
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                        startActivity(new Intent(login.this, nav_bar.class));
+                        startActivity(new Intent(Login.this, NavBar.class));
 //                        progressDialog.hide();
 
 
                     } else {
-                        Toast.makeText(login.this, "Akun belum terdaftar / Password Salah", Toast.LENGTH_LONG).show();
+                        Toast.makeText(Login.this, "Akun belum terdaftar / Password Salah", Toast.LENGTH_LONG).show();
 //                        progressBar.setVisibility(View.GONE);
 //                        progressDialog.hide(); // tambahan
                     }

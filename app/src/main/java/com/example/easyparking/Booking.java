@@ -1,6 +1,5 @@
 package com.example.easyparking;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,17 +8,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import org.jetbrains.annotations.Nullable;
 
-public class booking extends Fragment {
+public class Booking extends Fragment {
     private DatabaseReference database = FirebaseDatabase.getInstance().getReference();
     private EditText nama, plat, type, warna;
     private TextView booking;
@@ -51,7 +48,7 @@ public class booking extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fm = getActivity().getSupportFragmentManager().beginTransaction();
-                fm.replace(R.id.fragmentView, new Pilih_Tempat()).commit();
+                fm.replace(R.id.fragmentView, new PilihTempat()).commit();
             }
         });
 
@@ -69,9 +66,9 @@ public class booking extends Fragment {
                     String getPlat = plat.getText().toString();
                     String getWarna = warna.getText().toString();
                     String getType = type.getText().toString();
-                    database.child("Booking").push().setValue(new dataBooking(getNama, getPlat, getType, getWarna));
+                    database.child("Booking").push().setValue(new DataBooking(getNama, getPlat, getType, getWarna));
                     FragmentTransaction fm = getActivity().getSupportFragmentManager().beginTransaction();
-                    fm.replace(R.id.fragmentView, new palang_Parkir()).commit();
+                    fm.replace(R.id.fragmentView, new PalangParkir()).commit();
                 }
             }
         });

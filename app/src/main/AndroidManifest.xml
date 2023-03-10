@@ -15,35 +15,35 @@
         android:theme="@style/Theme.EasyParking"
         tools:targetApi="31">
         <activity
-            android:name=".nav_bar"
+            android:name=".NavBar"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".forgotPassword"
+            android:name=".ForgotPassword"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".daftar_akun"
+            android:name=".DaftarAkun"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".login"
+            android:name=".Login"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Pilih_Tempat"
+            android:name=".PilihTempat"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
