@@ -1,8 +1,5 @@
 package com.example.easyparking;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,26 +8,32 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class DaftarAkun extends AppCompatActivity implements View.OnClickListener {
 
+    GoogleSignInOptions googleSignInOptions;
+    GoogleSignInClient googleSignInClient;
     private FirebaseAuth mAuth, auth;
-    private EditText etemail, etpassword,etNama;
+    private EditText etemail, etpassword, etNama;
+    //    private ProgressDialog progressDialog;
     private TextView daftar, tvGoogle;
     //    private ProgressBar progressBar;
     private ImageView back;
-//    private ProgressDialog progressDialog;
-
-    GoogleSignInOptions googleSignInOptions;
-    GoogleSignInClient googleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +57,7 @@ public class DaftarAkun extends AppCompatActivity implements View.OnClickListene
 
 //        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
-        googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
+        googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
 
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 
@@ -92,10 +93,12 @@ public class DaftarAkun extends AppCompatActivity implements View.OnClickListene
             }
         }
     }
+
     private void Signin() {
         Intent intent = googleSignInClient.getSignInIntent();
         startActivityForResult(intent, 100);
     }
+
     private void HomeActivity() {
         finish();
         Intent intent = new Intent(getApplicationContext(), Login.class);
@@ -145,34 +148,36 @@ public class DaftarAkun extends AppCompatActivity implements View.OnClickListene
 
 //        progressBar.setVisibility(View.VISIBLE);
 
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        User user = new User(email, password,nama);
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                User user = new User(email, password, nama);
 
-                        FirebaseDatabase.getInstance().getReference("Users")
-                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .setValue(user).addOnCompleteListener(task1 -> {
+                FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnCompleteListener(task1 -> {
 
-                                    if (task1.isSuccessful()) {
+                    if (task1.isSuccessful()) {
+                        FirebaseUser userfire = FirebaseAuth.getInstance().getCurrentUser();
 
-                                        Toast.makeText(DaftarAkun.this, "Akun berhasil didaftar", Toast.LENGTH_LONG).show();
+                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(nama).build();
+
+                        userfire.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(DaftarAkun.this, "Akun berhasil didaftar", Toast.LENGTH_LONG).show();
+                                    startActivity(new Intent(DaftarAkun.this, Login.class));
+                                }
+                            }
+                        });
+
 //                                        progressBar.setVisibility(View.VISIBLE);
-
-                                        startActivity(new Intent(this, Login.class));
-//
-
-                                    } else {
-
-                                        Toast.makeText(DaftarAkun.this, "Terjadi Kesalahan, Silahkan Coba Lagi", Toast.LENGTH_LONG).show();
-
-                                    }
-                                });
                     } else {
-                        Toast.makeText(DaftarAkun.this, "Akun Sudah Terdaftar", Toast.LENGTH_LONG).show();
-//
+                        Toast.makeText(DaftarAkun.this, "Terjadi Kesalahan, Silahkan Coba Lagi", Toast.LENGTH_LONG).show();
                     }
                 });
+            } else {
+                Toast.makeText(DaftarAkun.this, "Akun Sudah Terdaftar", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
-    }
+}
