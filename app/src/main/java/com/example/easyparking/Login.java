@@ -181,4 +181,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     }
                 });
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            startActivity(new Intent(Login.this, NavBar.class));
+        }
+    }
 }
