@@ -53,7 +53,7 @@ public class EditProfile extends Fragment {
             @Override
             public void onClick(View v) {
                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                        .setDisplayName(editNama.getText().toString())
+                        .setDisplayName(editNama.getText().toString().trim())
                         .build();
 
                 user.updateProfile(profileUpdates)
