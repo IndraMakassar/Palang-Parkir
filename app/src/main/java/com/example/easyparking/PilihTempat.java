@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,7 +25,8 @@ import java.util.ArrayList;
 
 public class PilihTempat extends Fragment {
     private DatabaseReference database;
-    private TextView malltrans, mallpipo, mallGTC, mallkarebosi, mallMP, mallmari, mallnipah, mallMTC;
+    private TextView nama;
+    private FirebaseUser user;
     RecyclerView recyclerView;
     MyAdapter myAdapter;
     ArrayList<User2> list;
@@ -43,6 +45,7 @@ public class PilihTempat extends Fragment {
 
         View c = inflater.inflate(R.layout.fragment_pilih__tempat, container, false);
 
+        nama = c.findViewById(R.id.nama);
 
         recyclerView = c.findViewById(R.id.listnama);
         database = FirebaseDatabase.getInstance().getReference("Data Booking");
