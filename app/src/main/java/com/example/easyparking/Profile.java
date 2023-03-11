@@ -23,6 +23,7 @@ public class Profile extends Fragment {
     private TextView emailKecil;
     private TextView telpKecil;
     private TextView logoutBtn;
+    private TextView editProfile;
     private FirebaseUser user;
 
     @Override
@@ -41,6 +42,7 @@ public class Profile extends Fragment {
         emailKecil = view.findViewById(R.id.emailKecil);
         telpKecil = view.findViewById(R.id.telpKecil);
         logoutBtn = view.findViewById(R.id.logoutBtn);
+        editProfile = view.findViewById(R.id.edit_profile);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -57,6 +59,17 @@ public class Profile extends Fragment {
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(getActivity(), Login.class));
+            }
+        });
+
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getParentFragmentManager().beginTransaction()
+                        .setReorderingAllowed(true)
+                        .replace(R.id.fragmentView, EditProfile.class, null)
+                        .commit();
+
             }
         });
 
