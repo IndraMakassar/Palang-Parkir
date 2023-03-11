@@ -1,46 +1,37 @@
 package com.example.easyparking;
 
-import static android.content.ContentValues.TAG;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
+    GoogleSignInOptions googleSignInOptions;
+    GoogleSignInClient googleSignInClient;
     private TextView daftar, forgotPassword;
     private EditText etemail, etpassword;
-    private TextView tvGoogle, login;
-    private FirebaseUser user;
 
 
     //    private ProgressBar progressBar;
 //    private ProgressDialog progressDialog;
-
+    private TextView tvGoogle, login;
+    private FirebaseUser user;
     private FirebaseAuth mAuth, auth;
-
-    GoogleSignInOptions googleSignInOptions;
-    GoogleSignInClient googleSignInClient;
 
     @Override
     public void onBackPressed() {
@@ -117,6 +108,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 break;
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -131,10 +123,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             }
         }
     }
+
     private void Signin() {
         Intent intent = googleSignInClient.getSignInIntent();
         startActivityForResult(intent, 100);
     }
+
     private void HomeActivity() {
         finish();
         Intent intent = new Intent(getApplicationContext(), NavBar.class);
@@ -175,9 +169,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-
-                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
+                        user = FirebaseAuth.getInstance().getCurrentUser();
                         startActivity(new Intent(Login.this, NavBar.class));
 //                        progressDialog.hide();
 
