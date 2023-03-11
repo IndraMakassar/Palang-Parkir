@@ -1,10 +1,15 @@
 package com.example.easyparking;
 
+import static android.content.ContentValues.TAG;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,15 +20,18 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
     private TextView daftar, forgotPassword;
     private EditText etemail, etpassword;
     private TextView tvGoogle, login;
+    private FirebaseUser user;
 
 
     //    private ProgressBar progressBar;
@@ -35,9 +43,20 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     GoogleSignInClient googleSignInClient;
 
     @Override
+    public void onBackPressed() {
+    }
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            startActivity(new Intent(Login.this, NavBar.class));
+        }
+
 
         daftar = (TextView) findViewById(R.id.daftar);
         daftar.setOnClickListener(this);
@@ -53,8 +72,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         forgotPassword.setOnClickListener(this);
 
 //        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-
-
 
         tvGoogle = findViewById(R.id.google);
 
