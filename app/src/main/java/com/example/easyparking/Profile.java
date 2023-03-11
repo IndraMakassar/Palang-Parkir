@@ -47,8 +47,6 @@ public class Profile extends Fragment {
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         String nama = user.getDisplayName();
-        System.out.println(nama);
-
         namaBesar.setText(nama);
         namaKecil.setText(nama);
         emailKecil.setText(user.getEmail());
@@ -74,5 +72,15 @@ public class Profile extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        String nama = user.getDisplayName();
+        namaBesar.setText(nama);
+        namaKecil.setText(nama);
+        emailKecil.setText(user.getEmail());
+        telpKecil.setText(user.getPhoneNumber());
     }
 }
