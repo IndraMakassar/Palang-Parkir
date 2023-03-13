@@ -60,10 +60,13 @@ public class PilihTempat extends Fragment {
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    User2 user = dataSnapshot.getValue(User2.class);
-                    user.modelUser2(dataSnapshot.child("Nama Mall").getValue().toString());
-                    list.add(user);
+                list.clear();
+                if (snapshot.exists()) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        User2 user = dataSnapshot.getValue(User2.class);
+                        user.modelUser2(dataSnapshot.child("Nama Mall").getValue().toString());
+                        list.add(user);
+                    }
                 }
                 myAdapter.notifyDataSetChanged();
             }
