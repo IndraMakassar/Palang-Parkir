@@ -24,6 +24,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 
 public class PilihTempat extends Fragment {
+    private static final String ARG_ITEM = "item";
     private DatabaseReference database;
     private TextView nama;
     private FirebaseUser user;
@@ -31,12 +32,10 @@ public class PilihTempat extends Fragment {
     private MyAdapter myAdapter;
     private ArrayList<User2> list;
 
-
     @Nullable
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -54,7 +53,22 @@ public class PilihTempat extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         list = new ArrayList<>();
 
-        myAdapter = new MyAdapter(this.getContext(), list);
+        myAdapter = new MyAdapter(this.getContext(), list, new MyAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(User2 item) {
+                DetailTempat fragment = new DetailTempat();
+                Bundle bundle = new Bundle();
+                bundle.putString(ARG_ITEM, item.getNamaMall());
+                fragment.setArguments(bundle);
+
+                System.out.println(item.getNamaMall());
+
+                getParentFragmentManager().beginTransaction()
+                        .setReorderingAllowed(true)
+                        .replace(R.id.fragmentView, fragment)
+                        .commit();
+            }
+        });
         recyclerView.setAdapter(myAdapter);
 
         database.addValueEventListener(new ValueEventListener() {
@@ -73,111 +87,8 @@ public class PilihTempat extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
-
-//        mallpipo = (TextView) c.findViewById(R.id.pipo);
-//        mallGTC = (TextView) c.findViewById(R.id.gtc);
-//        mallkarebosi = (TextView) c.findViewById(R.id.karbos);
-//        mallMP = (TextView) c.findViewById(R.id.mp);
-//        mallmari = (TextView) c.findViewById(R.id.mari);
-//        mallnipah = (TextView) c.findViewById(R.id.nipah);
-//        mallMTC = (TextView) c.findViewById(R.id.mp2);
-
-//
-//        malltrans.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String getTrans = malltrans.getText().toString();
-//                database.child("Tempat Pakir").child("Pilihan Tempat").setValue(getTrans);// untuk database
-//                FragmentTransaction fm = getActivity().getSupportFragmentManager().beginTransaction();
-//                fm.replace(R.id.fragmentView, new booking()).commit();
-//            }
-//        });
-//
-//        mallmari.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String getMari = mallmari.getText().toString();
-//                database.child("Tempat Pakir").child("Pilihan Tempat").setValue(getMari);// untuk database
-//                FragmentTransaction fm = getActivity().getSupportFragmentManager().beginTransaction();
-//                fm.replace(R.id.fragmentView, new booking()).commit();
-//            }
-//        });
-//
-//        mallpipo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String getPipo = mallpipo.getText().toString();
-//                database.child("Tempat Pakir").child("Pilihan Tempat").setValue(getPipo);// untuk database
-//                  FragmentTransaction fm = getActivity().getSupportFragmentManager().beginTransaction();
-//                fm.replace(R.id.fragmentView, new booking()).commit();
-//            }
-//        });
-//
-//        mallpipo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String getPipo = mallpipo.getText().toString();
-//                database.child("Data Booking").child("Pilihan Tempat").setValue(getPipo);// untuk database
-//                FragmentTransaction fm = getActivity().getSupportFragmentManager().beginTransaction();
-//                fm.replace(R.id.fragmentView, new booking()).commit();
-//            }
-//        });
-//
-//        mallGTC.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String getGTC = mallGTC.getText().toString();
-//                database.child("Tempat Pakir").child("Pilihan Tempat").setValue(getGTC);// untuk database
-//                FragmentTransaction fm = getActivity().getSupportFragmentManager().beginTransaction();
-//                fm.replace(R.id.fragmentView, new Pilih_Tempat()).commit();
-//            }
-//        });
-//
-//        mallMP.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String getMP = mallMP.getText().toString();
-//                database.child("Tempat Pakir").child("Pilihan Tempat").setValue(getMP);// untuk database
-//                FragmentTransaction fm = getActivity().getSupportFragmentManager().beginTransaction();
-//                fm.replace(R.id.fragmentView, new Pilih_Tempat()).commit();
-//            }
-//        });
-//
-//        mallnipah.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String getNipah = mallnipah.getText().toString();
-//                database.child("Tempat Pakir").child("Pilihan Tempat").setValue(getNipah);// untuk database
-//                FragmentTransaction fm = getActivity().getSupportFragmentManager().beginTransaction();
-//                fm.replace(R.id.fragmentView, new Pilih_Tempat()).commit();
-//            }
-//        });
-//
-//        mallkarebosi.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String getKarebosi = mallkarebosi.getText().toString();
-//                database.child("Tempat Pakir").child("Pilihan Tempat").setValue(getKarebosi);// untuk database
-//                FragmentTransaction fm = getActivity().getSupportFragmentManager().beginTransaction();
-//                fm.replace(R.id.fragmentView, new Pilih_Tempat()).commit();
-//            }
-//        });
-//
-//        mallMTC.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String getMTC = mallMTC.getText().toString();
-//                database.child("Tempat Pakir").child("Pilihan Tempat").setValue(getMTC);// untuk database
-//                FragmentTransaction fm = getActivity().getSupportFragmentManager().beginTransaction();
-//                fm.replace(R.id.fragmentView, new Pilih_Tempat()).commit();
-//            }
-//        });
-
         return c;
-
     }
-
 }
