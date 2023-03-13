@@ -66,6 +66,8 @@ public class EditProfile extends Fragment {
                             }
                         });
 
+                user.updateEmail(editEmail.getText().toString());
+
                 getParentFragmentManager().beginTransaction()
                         .setReorderingAllowed(true)
                         .replace(R.id.fragmentView, Profile.class, null)
