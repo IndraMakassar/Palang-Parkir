@@ -4,24 +4,21 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-//import com.google.firebase.database.core.Context;
-
 import java.util.ArrayList;
 
-public class MyAdapter extends RecyclerView.Adapter <MyAdapter.MyViewHolder> {
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+    private Context context;
+    private ArrayList<User2> list;
+    private final OnItemClickListener listener;
 
-    Context context;
-
-    ArrayList <User2> list;
-
-    public MyAdapter(Context context, ArrayList<User2> list) {
-        this.context = context;
-        this.list = list;
+    public interface OnItemClickListener {
+        void onItemClick(User2 item);
     }
 
     @NonNull
@@ -31,12 +28,24 @@ public class MyAdapter extends RecyclerView.Adapter <MyAdapter.MyViewHolder> {
         return new MyViewHolder(v);
     }
 
+    public MyAdapter(Context context, ArrayList<User2> list, OnItemClickListener listener) {
+        this.context = context;
+        this.list = list;
+        this.listener = listener;
+    }
+
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         User2 user = list.get(position);
         holder.mall.setText(user.getNamaMall());
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClick(user);
+            }
+        });
     }
 
     @Override
@@ -44,10 +53,8 @@ public class MyAdapter extends RecyclerView.Adapter <MyAdapter.MyViewHolder> {
         return list.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
-
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView mall;
-
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
