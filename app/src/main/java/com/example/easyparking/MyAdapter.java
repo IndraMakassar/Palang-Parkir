@@ -15,6 +15,8 @@ import java.util.ArrayList;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private Context context;
     private ArrayList<User2> list;
+    private ArrayList<Long> listDiisi;
+    private ArrayList<Long> listKosong;
     private final OnItemClickListener listener;
 
     public interface OnItemClickListener {
@@ -28,17 +30,25 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         return new MyViewHolder(v);
     }
 
-    public MyAdapter(Context context, ArrayList<User2> list, OnItemClickListener listener) {
+    public MyAdapter(Context context, ArrayList<User2> list, ArrayList<Long> listDiisi, ArrayList<Long> listKosong, OnItemClickListener listener) {
         this.context = context;
         this.list = list;
+        this.listDiisi = listDiisi;
+        this.listKosong = listKosong;
         this.listener = listener;
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
         User2 user = list.get(position);
+        double diisi = listDiisi.get(position);
+        double kosong = listKosong.get(position);
+        int persen = (int) ((diisi/kosong)*100);
+        System.out.println(persen);
+        System.out.println();
+        String persenString = String.valueOf(persen);
         holder.mall.setText(user.getNamaMall());
+        holder.persenView.setText(persenString+" %");
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,9 +65,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView mall;
+        TextView persenView;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            persenView = itemView.findViewById(R.id.persenKosong);
             mall = itemView.findViewById(R.id.listMall);
         }
     }

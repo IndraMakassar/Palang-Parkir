@@ -210,11 +210,20 @@
         android:id="@+id/listnama"
         android:layout_width="350dp"
         android:layout_height="450dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search"
         tools:listitem="@layout/item"/>
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/listnama"-->
+<!--        android:layout_width="350dp"-->
+<!--        android:layout_height="450dp"-->
+<!--        android:layout_marginTop="24dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.491"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        tools:listitem="@layout/item" />-->
 
     <!--    <TextView-->
 <!--        android:id="@+id/trans"-->

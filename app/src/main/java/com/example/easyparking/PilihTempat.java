@@ -55,10 +55,10 @@ public class PilihTempat extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         list = new ArrayList<>();
 
-        myAdapter = new MyAdapter(this.getContext(), list, new MyAdapter.OnItemClickListener() {
+        myAdapter = new MyAdapter(this.getContext(), list, diisi, kosong,new MyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(User2 item) {
-                DetailTempat fragment = new DetailTempat();
+                Booking fragment = new Booking();
                 Bundle bundle = new Bundle();
                 bundle.putString(ARG_ITEM, item.getNamaMall());
                 fragment.setArguments(bundle);
@@ -74,6 +74,8 @@ public class PilihTempat extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
+                diisi.clear();
+                kosong.clear();
                 if (snapshot.exists()) {
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         User2 user = dataSnapshot.getValue(User2.class);
