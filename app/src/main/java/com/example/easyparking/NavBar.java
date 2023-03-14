@@ -1,7 +1,5 @@
 package com.example.easyparking;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -9,6 +7,8 @@ import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class NavBar extends AppCompatActivity {
     private int selectedTab = 1;
@@ -23,7 +23,6 @@ public class NavBar extends AppCompatActivity {
 
         final ImageView homeImage = findViewById(R.id.homeImage);
         final ImageView profileImage = findViewById(R.id.profileImage);
-
 
         final TextView homeTxt = findViewById(R.id.homeTxt);
         final TextView profileTxt = findViewById(R.id.profileTxt);
