@@ -31,6 +31,8 @@ public class PilihTempat extends Fragment {
     private RecyclerView recyclerView;
     private MyAdapter myAdapter;
     private ArrayList<User2> list;
+    private ArrayList<Long> diisi = new ArrayList<Long>();
+    private ArrayList<Long> kosong = new ArrayList<Long>();
 
     @Nullable
     @Override
@@ -63,10 +65,7 @@ public class PilihTempat extends Fragment {
 
                 System.out.println(item.getNamaMall());
 
-                getParentFragmentManager().beginTransaction()
-                        .setReorderingAllowed(true)
-                        .replace(R.id.fragmentView, fragment)
-                        .commit();
+                getParentFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragmentView, fragment).commit();
             }
         });
         recyclerView.setAdapter(myAdapter);
@@ -78,6 +77,10 @@ public class PilihTempat extends Fragment {
                 if (snapshot.exists()) {
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         User2 user = dataSnapshot.getValue(User2.class);
+
+                        diisi.add((Long) dataSnapshot.child("diisi").getValue());
+                        kosong.add((Long) dataSnapshot.child("kosong").getValue());
+
                         user.modelUser2(dataSnapshot.child("Nama Mall").getValue().toString());
                         list.add(user);
                     }
