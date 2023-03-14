@@ -76,13 +76,11 @@ public class DaftarAkun extends AppCompatActivity implements View.OnClickListene
 //                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
-
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == 100) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
@@ -105,16 +103,13 @@ public class DaftarAkun extends AppCompatActivity implements View.OnClickListene
         startActivity(intent);
     }
 
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnDaftar:
                 registerUser();
                 break;
-
         }
-
     }
 
     private void registerUser() {
@@ -145,7 +140,6 @@ public class DaftarAkun extends AppCompatActivity implements View.OnClickListene
 //        progressDialog.show();
 //        progressDialog.setContentView(R.layout.progress_dialog);
 //        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-
 //        progressBar.setVisibility(View.VISIBLE);
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
