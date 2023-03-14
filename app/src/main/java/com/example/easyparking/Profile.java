@@ -13,10 +13,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class Profile extends Fragment {
-
-    private String mParam1;
-    private String mParam2;
-
     private View view;
     private TextView namaBesar;
     private TextView namaKecil;
@@ -33,8 +29,7 @@ public class Profile extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         namaBesar = view.findViewById(R.id.namaBesar);
@@ -63,11 +58,7 @@ public class Profile extends Fragment {
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getParentFragmentManager().beginTransaction()
-                        .setReorderingAllowed(true)
-                        .replace(R.id.fragmentView, EditProfile.class, null)
-                        .commit();
-
+                getParentFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragmentView, EditProfile.class, null).commit();
             }
         });
 
