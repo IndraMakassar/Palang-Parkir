@@ -3,14 +3,12 @@ package com.example.easyparking;
 public class DataBooking {
     private String nama;
     private String plat;
-    private String type;
-    private String warna;
+    private String tempat;
 
-    public DataBooking(String nama, String plat, String type, String warna) {
+    public DataBooking(String nama, String plat, String tempat) {
         this.nama = nama;
         this.plat = plat;
-        this.type = type;
-        this.warna = warna;
+        this.tempat = tempat;
     }
 
     public String getNama() {
@@ -29,19 +27,11 @@ public class DataBooking {
         this.plat = plat;
     }
 
-    public String getType() {
-        return type;
+    public String getTempat() {
+        return tempat;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getWarna() {
-        return warna;
-    }
-
-    public void setWarna(String warna) {
-        this.warna = warna;
+    public void setTempat(String tempat) {
+        this.tempat = tempat;
     }
 }
