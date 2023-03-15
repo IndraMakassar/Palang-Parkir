@@ -47,6 +47,12 @@ public class Booking extends Fragment {
         back = (ImageView) c.findViewById(R.id.backImage);
         booking = (TextView) c.findViewById(R.id.btnbooking);
 
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        nama.setText(user.getDisplayName());
+
+        Bundle bundle = getArguments();
+        String lokasi = bundle.getString(ARG_ITEM);
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
