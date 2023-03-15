@@ -11,7 +11,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginTop="0dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,7 +21,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="?android:attr/listDivider"/>
+            android:background="@color/grey"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,10 +56,5 @@
 
         </LinearLayout>
     </LinearLayout>
-
-
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+
