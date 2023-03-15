@@ -62,9 +62,7 @@ public class PilihTempat extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putString(ARG_ITEM, item.getNamaMall());
                 fragment.setArguments(bundle);
-
                 System.out.println(item.getNamaMall());
-
                 getParentFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.fragmentView, fragment).commit();
             }
         });
