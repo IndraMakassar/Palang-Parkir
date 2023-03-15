@@ -7,10 +7,13 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -18,10 +21,12 @@ import org.jetbrains.annotations.Nullable;
 
 public class Booking extends Fragment {
     private DatabaseReference database = FirebaseDatabase.getInstance().getReference();
-    private EditText nama, plat, type, warna;
+    private EditText nama, plat;
     private TextView booking;
     private ImageView back;
     private Boolean terisi;
+    private FirebaseUser user;
+    private static final String ARG_ITEM = "item";
 
     @Nullable
     @Override
@@ -39,8 +44,6 @@ public class Booking extends Fragment {
         back = (ImageView) c.findViewById(R.id.backImage);
         nama = (EditText) c.findViewById(R.id.inputNama);
         plat = (EditText) c.findViewById(R.id.inputPlat);
-        type = (EditText) c.findViewById(R.id.inputType);
-        warna = (EditText) c.findViewById(R.id.inputWarna);
         back = (ImageView) c.findViewById(R.id.backImage);
         booking = (TextView) c.findViewById(R.id.btnbooking);
 
@@ -64,11 +67,14 @@ public class Booking extends Fragment {
                 if (terisi) {
                     String getNama = nama.getText().toString();
                     String getPlat = plat.getText().toString();
-                    String getWarna = warna.getText().toString();
-                    String getType = type.getText().toString();
-                    database.child("Booking").push().setValue(new DataBooking(getNama, getPlat, getType, getWarna));
-                    FragmentTransaction fm = getActivity().getSupportFragmentManager().beginTransaction();
-                    fm.replace(R.id.fragmentView, new PalangParkir()).commit();
+                    database.child("PlatBooking").child(getPlat).setValue(new User3(lokasi));
+                    database.child("Booking").push().setValue(new DataBooking(getNama, getPlat, lokasi));
+                    Toast.makeText(getActivity(), "Booking Berhasil",
+                            Toast.LENGTH_LONG).show();
+                    getParentFragmentManager().beginTransaction()
+                            .setReorderingAllowed(true)
+                            .replace(R.id.fragmentView, PilihTempat.class, null)
+                            .commit();
                 }
             }
         });
@@ -79,8 +85,6 @@ public class Booking extends Fragment {
     public void booking() {
         String isinama = nama.getText().toString();
         String isiplat = plat.getText().toString();
-        String isitype = type.getText().toString();
-        String isiwarna = warna.getText().toString();
         terisi = true;
 
         if (isinama.isEmpty()) {
@@ -96,21 +100,6 @@ public class Booking extends Fragment {
             terisi = false;
             return;
         }
-
-        if (isitype.isEmpty()) {
-            type.setError("Plat Belum Di input");
-            type.requestFocus();
-            terisi = false;
-            return;
-        }
-
-        if (isiwarna.isEmpty()) {
-            warna.setError("Plat Belum Di input");
-            warna.requestFocus();
-            terisi = false;
-            return;
-        }
-
 
     }
 }
