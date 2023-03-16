@@ -48,7 +48,7 @@
             android:paddingStart="-25dp"
             android:textSize="26sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:gravity="center"/>
 
     </LinearLayout>
