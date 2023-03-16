@@ -41,14 +41,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         User2 user = list.get(position);
-        double diisi = listDiisi.get(position);
-        double kosong = listKosong.get(position);
-        int persen = (int) ((diisi/kosong)*100);
-        System.out.println(persen);
-        System.out.println();
-        String persenString = String.valueOf(persen);
+        int diisi = listDiisi.get(position).intValue();
+        int kosong = listKosong.get(position).intValue();
+        String tempat = diisi + "/" + kosong;
         holder.mall.setText(user.getNamaMall());
-        holder.persenView.setText(persenString+" %");
+        holder.persenView.setText(tempat);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
